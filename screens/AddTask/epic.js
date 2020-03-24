@@ -8,6 +8,7 @@ import {
   ADD_TASK_FAILED
 } from './action';
 import HttpService from '../../store/httpService';
+import { CATEGORY, ACCOUNT_URL } from '../../config';
 
 class AddTaskEpic {
   static addTask = action$ =>
@@ -16,8 +17,8 @@ class AddTaskEpic {
       switchMap(({payload}) =>
         from(HttpService.post('https://gsmtasks.com/api/tasks/tasks/', {
           "address": { "raw_address": payload },
-          "category": "assignment",
-          "account": "https://gsmtasks.com/api/tasks/accounts/77fd7716-7c6d-497f-a800-7608ad2b108d/"
+          "category": CATEGORY,
+          "account": ACCOUNT_URL
         })).pipe(
           switchMap(res => {
             return of({
