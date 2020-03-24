@@ -10,8 +10,15 @@ export default function Map() {
   const refMap = useRef(null);
   const map = useSelector(state => state.map);
   const [markers,setMarkers] = useState([]);
+  const [fetchCount,updateFetchCount] = useState(0);
+
   useEffect(() => {
-    dispatch({ type: GET_ALL_TASK });
+    function fetchTasks() {
+      dispatch({ type: GET_ALL_TASK });
+    }
+
+    let id = setInterval(fetchTasks, 5000);
+    return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
@@ -25,10 +32,15 @@ export default function Map() {
     })
 
     setMarkers(tempMarkers);
-    refMap.current.fitToCoordinates(tempMarkers, {
-      edgePadding: { top: 200, right: 200, bottom: 100, left: 200 },
-      animated: true,
-    });
+    // initial location will be Tallin but after first fetch request if there are markers then it will adjust map according to markers
+    if(tempMarkers.length > 0 && fetchCount == 0){
+      refMap.current.fitToCoordinates(tempMarkers, {
+        edgePadding: { top: 200, right: 200, bottom: 100, left: 200 },
+        animated: true,
+      });
+    }
+    updateFetchCount(fetchCount+1);
+    
 
   }, [map.tasks]);
 
