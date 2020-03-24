@@ -1,4 +1,4 @@
-import  React, { useEffect, useState } from 'react';
+import  React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View,Dimensions } from 'react-native';
 import MapView,{ Marker } from 'react-native-maps';
@@ -7,6 +7,7 @@ import { GET_ALL_TASK } from './action';
 
 export default function Map() {
   const dispatch = useDispatch();
+  const refMap = useRef(null);
   const map = useSelector(state => state.map);
   const [markers,setMarkers] = useState([])
   useEffect(() => {
@@ -23,10 +24,15 @@ export default function Map() {
       })
     })
     setMarkers(tempMarkers);
+    refMap.current.fitToCoordinates(tempMarkers, {
+      edgePadding: { top: 200, right: 200, bottom: 100, left: 200 },
+      animated: true,
+    });
   }, [map.tasks]);
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle} 
+      <MapView style={styles.mapStyle}
+        ref={refMap} 
         initialRegion={{
             latitude: 59.4370,
             longitude: 24.7536,
