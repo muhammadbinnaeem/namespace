@@ -1,0 +1,3 @@
+export const GET_ALL_TASK = 'GET_ALL_TASK';
+export const GET_ALL_TASK_SUCCESS = 'GET_ALL_TASK_SUCCESS';
+export const GET_ALL_TASK_FAILED = 'GET_ALL_TASK_FAILED';
