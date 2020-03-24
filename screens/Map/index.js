@@ -26,7 +26,14 @@ export default function Map() {
   }, [map.tasks]);
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle}>
+      <MapView style={styles.mapStyle} 
+        initialRegion={{
+            latitude: 59.4370,
+            longitude: 24.7536,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+        }}
+      >
           {markers.map((marker, i) => 
             ( <Marker key={i} identifier={`id${i}`} coordinate={marker} />) 
           )}
