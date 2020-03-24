@@ -4,7 +4,7 @@ import { GET_ALL_TASK_SUCCESS, GET_ALL_TASK_FAILED } from "./action";
     tasks: []
   };
   
-  export const mapReducer = (state = { tasks: [] }, action) => {
+  export const mapReducer = (state = initialmapReducer, action) => {
     switch (action.type) {
       case GET_ALL_TASK_SUCCESS:
         return {

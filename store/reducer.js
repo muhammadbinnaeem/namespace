@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { mapReducer, initialmapReducer } from '../screens';
+import { mapReducer, initialmapReducer, initialaddTaskReducer, addTaskReducer } from '../screens';
 
 export const rootInitialState = {
-  map: initialmapReducer
+  map: initialmapReducer,
+  addTask: initialaddTaskReducer
 };
 
 export const rootReducer = combineReducers({
-  map: mapReducer
+  map: mapReducer,
+  addTask: addTaskReducer
 });

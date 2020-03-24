@@ -1,7 +1,8 @@
 import { combineEpics } from 'redux-observable';
 
-import { MapEpic } from '../screens';
+import { MapEpic,addTaskEpic } from '../screens';
 
 export default combineEpics(
-  MapEpic.getAllTasks
+  MapEpic.getAllTasks,
+  addTaskEpic.addTask
 );
