@@ -1,27 +1,23 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet, View,Dimensions } from 'react-native';
+import MapView from 'react-native-maps';
 
 
 export default function Map() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      </ScrollView>
+      <MapView style={styles.mapStyle}></MapView>
     </View>
   );
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  contentContainer: {
-    paddingTop: 30,
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   }
 });
