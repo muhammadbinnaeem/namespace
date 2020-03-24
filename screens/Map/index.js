@@ -9,7 +9,7 @@ export default function Map() {
   const dispatch = useDispatch();
   const refMap = useRef(null);
   const map = useSelector(state => state.map);
-  const [markers,setMarkers] = useState([])
+  const [markers,setMarkers] = useState([]);
   useEffect(() => {
     dispatch({ type: GET_ALL_TASK });
   }, []);
@@ -23,12 +23,15 @@ export default function Map() {
         longitude: task.address.location.coordinates[0]
       })
     })
+
     setMarkers(tempMarkers);
     refMap.current.fitToCoordinates(tempMarkers, {
       edgePadding: { top: 200, right: 200, bottom: 100, left: 200 },
       animated: true,
     });
+
   }, [map.tasks]);
+
   return (
     <View style={styles.container}>
       <MapView style={styles.mapStyle}
@@ -38,11 +41,8 @@ export default function Map() {
             longitude: 24.7536,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
-        }}
-      >
-          {markers.map((marker, i) => 
-            ( <Marker key={i} identifier={`id${i}`} coordinate={marker} />) 
-          )}
+        }}>
+        {markers.map((marker, i) => (<Marker key={i} identifier={`id${i}`} coordinate={marker} />))}
       </MapView>
     </View>
   );
